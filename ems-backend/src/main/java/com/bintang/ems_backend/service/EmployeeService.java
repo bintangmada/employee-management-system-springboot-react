@@ -53,4 +53,17 @@ public class EmployeeService {
 
         return null;
     }
+
+    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto employeeDto){
+        Employee existingEmployee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee is not found with id : "+employeeId));
+
+        existingEmployee.setFirstName(employeeDto.getFirstName());
+        existingEmployee.setLastName(employeeDto.getLastName());
+        existingEmployee.setEmail(employeeDto.getEmail());
+
+        Employee updatedEmployee = employeeRepository.save(existingEmployee);
+
+        return EmployeeMapper.mapToEmployeeDto(updatedEmployee);
+    }
 }
