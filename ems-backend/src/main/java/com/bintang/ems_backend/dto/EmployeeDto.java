@@ -6,15 +6,18 @@ public class EmployeeDto {
     private String firstName;
     private String lastName;
     private String email;
+    private int deletedStatus;
+
 
     public EmployeeDto() {
     }
 
-    public EmployeeDto(Long id, String firstName, String lastName, String email) {
+    public EmployeeDto(Long id, String firstName, String lastName, String email, int deletedStatus) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.deletedStatus = deletedStatus;
     }
 
     public Long getId() {
@@ -48,4 +51,14 @@ public class EmployeeDto {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public int getDeletedStatus() {
+        return deletedStatus;
+    }
+
+    public void setDeletedStatus(int deletedStatus) {
+        this.deletedStatus = deletedStatus;
+    }
+
+
 }

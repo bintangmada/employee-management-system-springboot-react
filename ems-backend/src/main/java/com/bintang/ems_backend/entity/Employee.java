@@ -11,18 +11,19 @@ public class Employee {
     private Long id;
     private String firstName;
     private String lastName;
-
     @Column(unique = true, nullable = false)
     private String email;
+    private int deletedStatus = 0;
 
     public Employee() {
     }
 
-    public Employee(Long id, String firstName, String lastName, String email) {
+    public Employee(Long id, String firstName, String lastName, String email, int deletedStatus) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.deletedStatus = deletedStatus;
     }
 
     public Long getId() {
@@ -55,5 +56,13 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getDeletedStatus() {
+        return deletedStatus;
+    }
+
+    public void setDeletedStatus(int deletedStatus) {
+        this.deletedStatus = deletedStatus;
     }
 }
