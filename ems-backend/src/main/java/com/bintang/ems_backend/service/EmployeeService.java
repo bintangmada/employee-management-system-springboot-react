@@ -66,4 +66,15 @@ public class EmployeeService {
 
         return EmployeeMapper.mapToEmployeeDto(updatedEmployee);
     }
+
+    public EmployeeDto deleteEmployee(Long employeeId){
+        Employee existingEmployee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee is not found with id : "+employeeId));
+
+        existingEmployee.setDeletedStatus(1);
+
+        Employee updatedEmployee = employeeRepository.save(existingEmployee);
+
+        return EmployeeMapper.mapToEmployeeDto(updatedEmployee);
+    }
 }
