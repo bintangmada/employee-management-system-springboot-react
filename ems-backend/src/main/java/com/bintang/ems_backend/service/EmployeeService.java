@@ -2,6 +2,7 @@ package com.bintang.ems_backend.service;
 
 import com.bintang.ems_backend.dto.EmployeeDto;
 import com.bintang.ems_backend.entity.Employee;
+import com.bintang.ems_backend.exception.ResourceNotFoundException;
 import com.bintang.ems_backend.mapper.EmployeeMapper;
 import com.bintang.ems_backend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,10 @@ public class EmployeeService {
 
     }
 
-    public EmployeeDto getEmployeeById(Long id){
-        return null;
+    public EmployeeDto getEmployeeById(Long employeeId){
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee is not found with id "+employeeId));
+
+        return EmployeeMapper.mapToEmployeeDto(employee);
     }
 }
