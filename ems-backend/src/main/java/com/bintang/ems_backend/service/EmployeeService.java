@@ -8,7 +8,9 @@ import com.bintang.ems_backend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -35,5 +37,20 @@ public class EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee is not found with id "+employeeId));
 
         return EmployeeMapper.mapToEmployeeDto(employee);
+    }
+
+    public List<EmployeeDto> getAllEmployees(){
+        List<Employee> employees = employeeRepository.findAll();
+
+        if(!employees.isEmpty() || employees != null){
+            List<EmployeeDto> listEmployees = employees
+                    .stream()
+                    .map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
+                    .collect(Collectors.toList());
+
+            return listEmployees;
+        }
+
+        return null;
     }
 }
