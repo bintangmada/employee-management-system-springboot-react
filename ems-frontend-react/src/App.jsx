@@ -1,4 +1,6 @@
 import "./App.css";
+import AddEmployeeComponent from "./components/AddEmployeeComponent";
+import addEmployeeComponent from "./components/AddEmployeeComponent";
 import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import ListEmployeeComponent from "./components/ListEmployeeComponent";
@@ -13,11 +15,16 @@ function App() {
         <Routes>
           {/* // localhost:5173/ */}
           <Route path="/" element={<ListEmployeeComponent />}></Route>
-
-          {/* // localhost:8033/api/employee/get-all */}
+          {/* // localhost:5173/employee/get-all */}
           <Route
-            path="/api/employee/get-all"
+            path="/employee/get-all"
             element={<ListEmployeeComponent />}
+          ></Route>
+
+          {/* // localhost:5173/employee/add-employee */}
+          <Route
+            path="/employee/add-employee"
+            element={<AddEmployeeComponent />}
           ></Route>
         </Routes>
         <FooterComponent />
