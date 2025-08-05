@@ -2,7 +2,7 @@ import React from "react";
 
 const HeaderComponent = () => {
   return (
-    <div className="container">
+    <div>
       <header>
         <nav className="navbar navbar-dark bg-dark">
           <a href="https://google.com" className="navbar-brand p-3">
