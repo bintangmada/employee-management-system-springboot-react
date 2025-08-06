@@ -7,10 +7,45 @@ const AddEmployeeComponent = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
   const navigator = useNavigate();
 
   function handleFirstName(e) {
     setFirstName(e.target.value);
+  }
+
+  function validateForm() {
+    const errorsCopy = { ...errors };
+    let valid = true;
+
+    if (firstName.trim()) {
+      errorsCopy.firstName = "";
+    } else {
+      errorsCopy.firstName = "First Name is Required";
+      valid = false;
+    }
+
+    if (lastName.trim()) {
+      errorsCopy.lastName = "";
+    } else {
+      errorsCopy.lastName = "Last Name is Required";
+      valid = false;
+    }
+
+    if (email.trim()) {
+      errorsCopy.email = "";
+    } else {
+      errorsCopy.email = "Email is Required";
+      valid = false;
+    }
+
+    setErrors(errorsCopy);
+    return valid;
   }
 
   // function handleLastName(e) {
