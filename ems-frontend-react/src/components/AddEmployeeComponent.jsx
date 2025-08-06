@@ -13,14 +13,20 @@ const AddEmployeeComponent = () => {
   //   setLastName(e.target.value);
   // }
 
-  function saveEmployee(){
+  // const handleEmail = (e) => {
+  //   setEmail(e.target.value);
+  // };
 
+  function saveEmployee(e) {
+    e.preventDefault();
+    const employee = { firstName, lastName, email };
+    console.log(employee);
   }
 
   return (
     <div className="container">
       <div className="row">
-        <div className="card">
+        <div className="card col-md-6 offset-md-3 p-4">
           <h2 className="text-center">Add Employee</h2>
           <div className="card-body">
             <form>
