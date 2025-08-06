@@ -58,13 +58,16 @@ const AddEmployeeComponent = () => {
 
   function saveEmployee(e) {
     e.preventDefault();
-    const employee = { firstName, lastName, email };
-    console.log(employee);
 
-    createEmployee(employee).then((response) => {
-      console.log(response.data);
-      navigator("/");
-    });
+    if (validateForm()) {
+      const employee = { firstName, lastName, email };
+      console.log(employee);
+
+      createEmployee(employee).then((response) => {
+        console.log(response.data);
+        navigator("/");
+      });
+    }
   }
 
   return (
@@ -81,36 +84,52 @@ const AddEmployeeComponent = () => {
                   placeholder="Input First Name"
                   name="firstName"
                   value={firstName}
-                  className="form-control mb-3"
+                  className={`form-control mb-3 ${
+                    errors.firstName ? "is-invalid" : ""
+                  }`}
                   onChange={handleFirstName}
                 ></input>
-
+                {errors.firstName && (
+                  <div className="invalid-feedback">{errors.firstName}</div>
+                )}
+              </div>
+              <div className="form-group mb-2">
                 <label className="form-label">Last Name </label>
                 <input
                   type="text"
                   placeholder="Input Last Name"
                   name="lastName"
                   value={lastName}
-                  className="form-control mb-3"
+                  className={`form-control mb-3 ${
+                    errors.lastName ? "is-invalid" : ""
+                  }`}
                   // onChange={handleLastName}
                   onChange={(e) => setLastName(e.target.value)}
                 ></input>
-
+                {errors.lastName && (
+                  <div className="invalid-feedback">{errors.lastName}</div>
+                )}
+              </div>
+              <div className="form-group mb-2">
                 <label className="form-label">Email </label>
                 <input
                   type="text"
                   placeholder="Input Email"
                   name="email"
                   value={email}
-                  className="form-control mb-3"
+                  className={`form-control mb-3 ${
+                    errors.email ? "is-invalid" : ""
+                  }`}
                   // onChange={handleLastName}
                   onChange={(e) => setEmail(e.target.value)}
                 ></input>
-
-                <button className="btn btn-success" onClick={saveEmployee}>
-                  Submit
-                </button>
+                {errors.email && (
+                  <div className="invalid-feedback">{errors.email}</div>
+                )}
               </div>
+              <button className="btn btn-success" onClick={saveEmployee}>
+                Submit
+              </button>
             </form>
           </div>
         </div>
