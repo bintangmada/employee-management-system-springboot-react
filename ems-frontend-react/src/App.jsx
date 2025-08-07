@@ -26,6 +26,9 @@ function App() {
             path="/employee/add-employee"
             element={<AddEmployeeComponent />}
           ></Route>
+
+          {/* // localhost:5173/employee/update-employee/{id} */}
+          <Route path="/employee/update/:id" element={<AddEmployeeComponent/>}></Route>
         </Routes>
         <FooterComponent />
       </BrowserRouter>
