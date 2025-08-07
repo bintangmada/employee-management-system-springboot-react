@@ -49,20 +49,25 @@ const ListEmployeeComponent = () => {
       </button>
       <table className="table table-striped table-bordered">
         <thead>
-          <tr>
-            <th>ID</th>
+          <tr className="align-middle">
+            <th className="text-center">ID</th>
             <th>FIRST NAME</th>
             <th>LAST NAME</th>
             <th>EMAIL</th>
+            <th>ACTION</th>
           </tr>
         </thead>
         <tbody>
           {employees.map((employee) => (
-            <tr key={employee.id}>
-              <td>{employee.id}</td>
+            <tr key={employee.id} className="align-middle">
+              <td className="text-center">{employee.id}</td>
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.email}</td>
+              <td>
+                <button className="btn btn-warning btn-sm">UPDATE</button>{" "}
+                <button className="btn btn-danger btn-sm">DELETE</button>
+              </td>
             </tr>
           ))}
         </tbody>
