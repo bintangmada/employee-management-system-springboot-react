@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createEmployee } from "../services/EmployeeService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddEmployeeComponent = () => {
   const [firstName, setFirstName] = useState("");
@@ -12,6 +12,8 @@ const AddEmployeeComponent = () => {
     lastName: "",
     email: "",
   });
+
+  const { id } = useParams();
 
   const navigator = useNavigate();
 
@@ -70,11 +72,19 @@ const AddEmployeeComponent = () => {
     }
   }
 
+  function pageTitle() {
+    if (id) {
+      return <h2 className="text-center">Edit Employee</h2>;
+    } else {
+      return <h2 className="text-center">Add Employee</h2>;
+    }
+  }
+
   return (
     <div className="container">
       <div className="row">
         <div className="card col-md-6 offset-md-3 p-4">
-          <h2 className="text-center">Add Employee</h2>
+          {pageTitle()}
           <div className="card-body">
             <form>
               <div className="form-group mb-2">
