@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { createEmployee } from "../services/EmployeeService";
+import React, { useEffect, useState } from "react";
+import { createEmployee, getOneEmployee } from "../services/EmployeeService";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AddEmployeeComponent = () => {
@@ -79,6 +79,16 @@ const AddEmployeeComponent = () => {
       return <h2 className="text-center">Add Employee</h2>;
     }
   }
+
+  useEffect(() => {
+    if (id) {
+      getOneEmployee(id).then((response) => {
+        setFirstName(response.data.firstName);
+        setLastName(response.data.lastName);
+        setEmail(response.data.email);
+      });
+    }
+  }, [id]);
 
   return (
     <div className="container">
