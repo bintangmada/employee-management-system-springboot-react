@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { createEmployee, getOneEmployee } from "../services/EmployeeService";
+import {
+  createEmployee,
+  getOneEmployee,
+  updateEmployee,
+} from "../services/EmployeeService";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AddEmployeeComponent = () => {
@@ -58,17 +62,32 @@ const AddEmployeeComponent = () => {
   //   setEmail(e.target.value);
   // };
 
-  function saveEmployee(e) {
+  function saveOrUpdateEmployee(e) {
     e.preventDefault();
 
     if (validateForm()) {
       const employee = { firstName, lastName, email };
       console.log(employee);
 
-      createEmployee(employee).then((response) => {
-        console.log(response.data);
-        navigator("/");
-      });
+      if (id) {
+        updateEmployee(id, employee)
+          .then((response) => {
+            console.log(response.data);
+            navigator("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        createEmployee(employee)
+          .then((response) => {
+            console.log(response.data);
+            navigator("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   }
 
@@ -147,7 +166,10 @@ const AddEmployeeComponent = () => {
                   <div className="invalid-feedback">{errors.email}</div>
                 )}
               </div>
-              <button className="btn btn-success" onClick={saveEmployee}>
+              <button
+                className="btn btn-success"
+                onClick={saveOrUpdateEmployee}
+              >
                 Submit
               </button>
             </form>
